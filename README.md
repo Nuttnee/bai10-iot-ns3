@@ -10,6 +10,46 @@ Bộ mã và hướng dẫn tiếng Việt dành cho người mới: cài môi t
 2. **Đã có NS-3 và NetAnim:** làm theo [HƯỚNG DẪN CÀI ĐẶT CHO BÀI 10.md](HƯỚNG%20DẪN%20CÀI%20ĐẶT%20CHO%20BÀI%2010.md).
 3. **Chỉ muốn xem kết quả mẫu:** tải repository bằng **Code → Download ZIP**, giải nén và mở `mophong_bai10.xml` bằng NetAnim.
 
+## Debian mới chỉ có terminal: cài giao diện để mở NetAnim
+
+Bản Debian tối giản trong bài này ban đầu **chưa có desktop**. NS-3 chạy bằng dòng lệnh; muốn xem cửa sổ NetAnim trong VirtualBox thì cài Xfce trước.
+
+**Nhập trong terminal Debian hoặc PuTTY đã kết nối Debian. Chạy lần lượt, đợi từng lệnh xong:**
+
+```bash
+sudo apt update
+sudo apt install task-xfce-desktop lightdm xfce4-terminal
+```
+
+Khi được hỏi, nhập `Y`; nếu phải chọn trình quản lý đăng nhập, chọn **lightdm**. Cài thành công rồi kiểm tra:
+
+```bash
+dpkg -l task-xfce-desktop lightdm xfce4-terminal
+```
+
+Cả ba gói có `ii` thì chạy:
+
+```bash
+sudo systemctl enable lightdm
+sudo systemctl set-default graphical.target
+```
+
+Lưu công việc, chờ build/cài đặt kết thúc, sau đó khởi động lại:
+
+```bash
+sudo reboot
+```
+
+PuTTY sẽ ngắt kết nối. **Chuyển sang cửa sổ Debian trong VirtualBox**, đăng nhập desktop Xfce → mở **Applications → Terminal Emulator**. Sau khi NetAnim đã được build, nhập tại đó:
+
+```bash
+~/netanim-bai10/build/bin/netanim
+```
+
+Giao diện xuất hiện trong VirtualBox, không tự hiện trong PuTTY. Chỉ đặt `graphical.target` không tự cài desktop.
+
+[Xem giải thích từng lệnh và xử lý khi vẫn chỉ thấy terminal](BAO_CAO.md#buoc-37) · [Chưa build NetAnim? Làm mục 3.6 trước](BAO_CAO.md#buoc-36).
+
 ## Các file
 
 | File | Vai trò |

@@ -338,61 +338,106 @@ ls -lh ~/netanim-bai10/build/bin/netanim
 
 <a id="buoc-37"></a>
 
-### 3.7. Cài desktop cho Debian bản máy chủ
+### 3.7. Debian mới chỉ có terminal: cài giao diện bằng lệnh
 
-**Nếu đã có desktop Debian và đăng nhập được bằng giao diện, bỏ qua phần cài này, sang 3.8.**
+**Bản Debian tối giản dùng trong bài này ban đầu chỉ có màn hình terminal (`login:` / `tty1`), chưa có desktop.** Debian cũng có thể được cài kèm desktop ngay từ đầu; hướng dẫn dưới đây dành cho trường hợp chưa có giao diện.
 
-Dấu nhắc đen `debian-iot login:` hoặc `tty1` là màn hình dòng lệnh. NetAnim mở từ đó hoặc từ PuTTY chưa cấu hình đồ họa có thể báo:
+NS-3 build và chạy được bằng terminal. **NetAnim là ứng dụng có cửa sổ**, nên muốn mở trực tiếp trong máy ảo thì cần cài giao diện Xfce và màn hình đăng nhập LightDM. Cài Qt / build NetAnim không tự cài đầy đủ desktop.
 
-```text
-qt.qpa.xcb: could not connect to display
-```
+**Nơi nhập lệnh bước A–E:** terminal Debian trong VirtualBox, hoặc PuTTY đã SSH vào Debian. Không nhập các lệnh `sudo apt ...` trong PowerShell Windows. Chạy lần lượt từng khối; chỉ sang bước sau khi bước trước hoàn tất không lỗi. Máy đã có desktop thì chuyển sang mục 3.8.
 
-Lỗi này chưa phải lý do cài lại NetAnim. Kiểm tra trong PuTTY:
+#### A. Đăng nhập Debian và cập nhật danh sách gói
 
-```bash
-dpkg -l task-xfce-desktop lightdm
-systemctl get-default
-```
-
-Nếu không tìm thấy hai gói như ảnh thực hành hiện tại, cần cài desktop. `graphical.target` chỉ là chế độ khởi động; riêng giá trị đó không chứng minh đã có desktop.
-
-**Trong PuTTY:**
+Nếu đang thấy `debian-iot login:`, nhập tài khoản Debian (máy minh họa là `nuthere`), Enter, rồi nhập mật khẩu. Mật khẩu không hiện ký tự khi gõ là bình thường. Khi thấy dấu nhắc dạng `nuthere@debian-iot:~$`, nhập:
 
 ```bash
 sudo apt update
-sudo apt install task-xfce-desktop
 ```
 
-APT sẽ thông báo dung lượng tải và dung lượng đĩa cần dùng. Kiểm tra đủ chỗ rồi nhập `Y` và Enter. Nếu được hỏi chọn trình quản lý đăng nhập, chọn **lightdm**. Đợi cài hoàn tất, không chuyển sang bước khởi động lại khi APT còn chạy hoặc đang báo lỗi.
+`sudo` chạy với quyền quản trị; nếu được hỏi mật khẩu, nhập mật khẩu tài khoản Debian. `apt update` chỉ cập nhật danh sách phần mềm, chưa cài giao diện.
 
-Kiểm tra lại:
+#### B. Cài giao diện Xfce, LightDM và terminal đồ họa
 
 ```bash
-dpkg -l task-xfce-desktop lightdm
+sudo apt install task-xfce-desktop lightdm xfce4-terminal
 ```
 
-Cần thấy ký hiệu **`ii`** đầu dòng của hai gói. Đặt chế độ khởi động:
+- `task-xfce-desktop`: cài môi trường desktop Xfce và các thành phần liên quan.
+- `lightdm`: tạo màn hình đăng nhập đồ họa.
+- `xfce4-terminal`: cửa sổ Terminal để nhập lệnh sau khi vào desktop.
+
+APT sẽ báo dung lượng cần tải và đĩa cần dùng. Nhập `Y` rồi Enter để cài. Nếu xuất hiện lựa chọn **Default display manager**, dùng phím mũi tên chọn **lightdm**, nhấn Tab tới **OK** rồi Enter. Đợi tới khi dấu nhắc lệnh xuất hiện lại; không khởi động lại khi APT còn chạy hoặc báo lỗi.
+
+Gói desktop được mô tả trong [tài liệu gói chính thức của Debian 12](https://packages.debian.org/bookworm/task-xfce-desktop).
+
+#### C. Kiểm tra đã cài đủ
+
+```bash
+dpkg -l task-xfce-desktop lightdm xfce4-terminal
+```
+
+Cả ba gói cần có ký hiệu **`ii`** đầu dòng. Nếu báo không tìm thấy gói hoặc trạng thái khác, xử lý lỗi cài đặt trước khi tiếp tục.
+
+#### D. Cho máy khởi động vào giao diện
+
+Chạy lần lượt:
+
+```bash
+sudo systemctl enable lightdm
+```
+
+Lệnh này bật dịch vụ màn hình đăng nhập khi Debian khởi động.
 
 ```bash
 sudo systemctl set-default graphical.target
 ```
 
-Lưu công việc, chờ các tiến trình build/cài đặt khác kết thúc rồi khởi động lại Debian:
+Lệnh này chọn chế độ khởi động đồ họa. **Chỉ chạy `set-default graphical.target` sẽ không tự cài desktop**; vẫn phải hoàn thành bước B.
+
+#### E. Khởi động lại Debian
+
+Lưu công việc và chờ các tiến trình build/cài đặt khác kết thúc, rồi nhập:
 
 ```bash
 sudo reboot
 ```
 
-**PuTTY sẽ ngắt kết nối, đó là bình thường.** Chuyển sang cửa sổ máy ảo trong VirtualBox, chờ màn hình đăng nhập đồ họa và đăng nhập tài khoản Debian. Nếu xuất hiện lựa chọn phiên, chọn Xfce.
+**PuTTY ngắt kết nối sau lệnh này là bình thường.** Mở cửa sổ máy ảo Debian trong VirtualBox, chờ màn hình đăng nhập đồ họa, đăng nhập tài khoản Debian. Nếu được chọn phiên làm việc, chọn **Xfce Session**. Desktop có thanh menu và cửa sổ là dấu hiệu đã có giao diện.
 
-Nếu vẫn chỉ có màn hình dòng lệnh, đăng nhập lại qua PuTTY và lấy thông báo:
+PuTTY vẫn chỉ là cửa sổ SSH văn bản; giao diện desktop xuất hiện trong **VirtualBox**, không tự xuất hiện trong PuTTY.
+
+#### F. Mở NetAnim từ desktop vừa cài
+
+Trong cửa sổ Debian của VirtualBox, chọn **Applications → Terminal Emulator**, nhập:
 
 ```bash
+~/netanim-bai10/build/bin/netanim
+```
+
+Lệnh này áp dụng sau khi đã build NetAnim ở mục 3.6. Khi cửa sổ NetAnim hiện ra, tiếp tục mục 3.8 để mở XML. Không chạy lệnh này bằng `sudo`.
+
+#### Nếu khởi động lại vẫn chỉ thấy terminal
+
+Đăng nhập tại terminal Debian hoặc kết nối lại bằng PuTTY, kiểm tra:
+
+```bash
+systemctl get-default
 systemctl status lightdm --no-pager -l
 ```
 
-Ghi lại lỗi cụ thể để xử lý. Không tự đặt `DISPLAY=:0` để thay cho việc tạo và đăng nhập một phiên đồ họa.
+Nếu LightDM đã cài nhưng đang `inactive`, khởi động dịch vụ:
+
+```bash
+sudo systemctl start lightdm
+```
+
+Sau đó xem lại cửa sổ VirtualBox. Nếu dịch vụ báo `failed`, lấy thông báo cụ thể:
+
+```bash
+sudo journalctl -u lightdm -b --no-pager -n 50
+```
+
+Lỗi `qt.qpa.xcb: could not connect to display` khi mở NetAnim trong PuTTY/tty có thể do chưa có phiên đồ họa. Không tự đặt `DISPLAY=:0` để thay cho việc cài và đăng nhập desktop; mở NetAnim từ Terminal bên trong desktop như bước F.
 
 <a id="buoc-38"></a>
 

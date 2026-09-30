@@ -4,6 +4,8 @@ Bộ mã và hướng dẫn tiếng Việt dành cho người mới: cài môi t
 
 ## Bắt đầu ở đâu?
 
+**Dùng Debian 12 trong VirtualBox:** xem [Báo cáo và hướng dẫn cài NS-3, NetAnim trên Debian](BAO_CAO.md). Có mục lục tới từng bước, cấu hình PuTTY và xử lý lỗi giao diện. Các hướng dẫn bên dưới giữ lại quy trình Ubuntu/WSL2 trước đó.
+
 1. **Máy chưa cài phần mềm:** đọc [Cài đặt lần đầu](CAI_DAT_LAN_DAU_BAI_10.md).
 2. **Đã có NS-3 và NetAnim:** làm theo [HƯỚNG DẪN CÀI ĐẶT CHO BÀI 10.md](HƯỚNG%20DẪN%20CÀI%20ĐẶT%20CHO%20BÀI%2010.md).
 3. **Chỉ muốn xem kết quả mẫu:** tải repository bằng **Code → Download ZIP**, giải nén và mở `mophong_bai10.xml` bằng NetAnim.
@@ -26,7 +28,7 @@ Bài dùng mô hình LTE/EPC của NS-3; không phải mô phỏng đầy đủ 
 
 ## Chạy nhanh khi đã cài môi trường
 
-Đặt `mophong_bai10.cc` vào `~/ns-3-dev/scratch/`. Sau đó nhập **trong Ubuntu**:
+Đặt `mophong_bai10.cc` vào `~/ns-3-dev/scratch/`. Sau đó nhập **trong terminal Debian hoặc Ubuntu**:
 
 ```bash
 cd ~/ns-3-dev

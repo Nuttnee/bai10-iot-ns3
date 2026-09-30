@@ -4,10 +4,9 @@
 
 | Thông tin | Nội dung |
 |---|---|
-| Sinh viên | ......................................... |
-| Mã sinh viên | ......................................... |
-| Lớp | ......................................... |
-| Ngày thực hiện | ......................................... |
+| Sinh viên | Bùi Cao Nguyên |
+| Mã sinh viên | 10124238 |
+| Lớp | 10124O.1 |
 
 > Cập nhật ngày 30/09/2026. **Hướng dẫn Debian ở mục 2–3; phân tích kết quả mẫu ở mục 4–8.**
 > Quy trình dùng Debian 12 trong VirtualBox, PuTTY để nhập lệnh và desktop Xfce để mở NetAnim.

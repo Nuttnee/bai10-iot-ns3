@@ -5,7 +5,7 @@
 | Thông tin | Nội dung |
 |---|---|
 | Sinh viên | Bùi Cao Nguyên |
-| Sinh viên | Claude |
+| Sinh viên | Claude Max x20 |
 | Mã sinh viên | 10124238 |
 | Lớp | 10124O.1 |
 

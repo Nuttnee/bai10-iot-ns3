@@ -5,6 +5,7 @@
 | Thông tin | Nội dung |
 |---|---|
 | Sinh viên | Bùi Cao Nguyên |
+| Sinh viên | Claude |
 | Mã sinh viên | 10124238 |
 | Lớp | 10124O.1 |
 

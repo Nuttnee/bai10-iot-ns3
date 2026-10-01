@@ -12,11 +12,12 @@ sudo apt install -y curl
 mkdir -p ~/BAI_XML_CHU_THICH
 cd ~/BAI_XML_CHU_THICH
 curl -fL --retry 2 -o mophong_3ue_chuthich_NETANIM.xml https://raw.githubusercontent.com/Nuttnee/bai10-iot-ns3/main/BAI_XML_CHU_THICH/mophong_3ue_chuthich_NETANIM.xml
+curl -fL --retry 2 -o mophong_3ue_chuthich_FLOWMON.xml https://raw.githubusercontent.com/Nuttnee/bai10-iot-ns3/main/BAI_XML_CHU_THICH/mophong_3ue_chuthich_FLOWMON.xml
 curl -fL --retry 2 -o GIAI_THICH_VA_CACH_MO.md https://raw.githubusercontent.com/Nuttnee/bai10-iot-ns3/main/BAI_XML_CHU_THICH/GIAI_THICH_VA_CACH_MO.md
 ls -lh
 ```
 
-Kho mã công khai, tải hai file này không cần tài khoản/mật khẩu GitHub. Nếu đã có curl thì bỏ qua hai lệnh cài đặt đầu. Chạy lại các lệnh tải sẽ cập nhật hai file cùng tên.
+Kho mã công khai, tải ba file này không cần tài khoản/mật khẩu GitHub. Nếu đã có curl thì bỏ qua hai lệnh cài đặt đầu. Chạy lại các lệnh tải sẽ cập nhật ba file cùng tên.
 
 Trong desktop Debian, mở NetAnim bằng cách đã cài trên máy. Nếu dùng đúng thư mục cài trong hướng dẫn bài 10:
 
@@ -29,7 +30,7 @@ Trong NetAnim: chọn **Animator → biểu tượng thư mục → Home → BAI
 - Mở XML từ bên trong NetAnim. Nhấp đúp XML trong trình quản lý file có thể mở Firefox và hiện mã thô; đó không phải lỗi file.
 - Nếu thiếu nhãn, bật **Show Node Id**. Kéo tốc độ về **slow**, phóng to và tắt lớp tọa độ/lưới nếu chữ bị chồng.
 - Để đọc tài liệu trên máy, dùng `mousepad ~/BAI_XML_CHU_THICH/GIAI_THICH_VA_CACH_MO.md` nếu đã có Mousepad, hoặc đọc trực tiếp trên GitHub.
-- Gói này không chứa mã C++, CSV hay FlowMonitor; các thông số và bảng dưới đây đã được chép từ lần chạy trên Debian gốc. Chỉnh sửa XML không chạy lại mô phỏng. Muốn đổi tham số và đo lại cần mã C++ cùng NS-3.
+- Gói này không chứa mã C++ hay CSV. File `mophong_3ue_chuthich_FLOWMON.xml` dùng để đọc thống kê gói tin; file `mophong_3ue_chuthich_NETANIM.xml` dùng để mở hình mô phỏng trong NetAnim. Chỉnh sửa XML không chạy lại mô phỏng. Muốn đổi tham số và đo lại cần mã C++ cùng NS-3.
 - Không mở FlowMonitor XML trong Animator. Ở bài cũ, `lte-3ue.xml` là hoạt họa, còn `lte-lab1-3ue.xml` là thống kê; hai tên đó dễ gây nhầm.
 
 ## 2. Bản này biểu diễn điều gì?
